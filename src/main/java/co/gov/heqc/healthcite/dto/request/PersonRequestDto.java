@@ -23,10 +23,11 @@ public class PersonRequestDto {
     @NotBlank(message = "The last name field cannot be empty")
     private String lastName;
     @NotBlank(message = "The document field cannot be empty")
-    @Pattern(regexp = "^\\d{14}$", message = "The document field must contain numbers and a maximum of 14 characters")
+    @Pattern(regexp = "^\\d{0,14}$", message = "The document field must contain numbers and a maximum of 14 characters")
     private String document;
     @NotBlank(message = "The phone field cannot be empty")
-    @Pattern(regexp = "^\\+?\\d{14}$", message = "The phone field must contain numbers and a maximum of 14 characters")
+    @Pattern(regexp = "^\\+?\\d{0,14}$", message = "The phone field must contain numbers and a maximum of 14 " +
+            "characters")
     private String phone;
     @NotBlank(message = "The address field cannot be empty")
     private String address;
