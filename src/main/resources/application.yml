@@ -1,0 +1,16 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: healthcite
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/healthcite
+    username: root
+    password: admin
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
