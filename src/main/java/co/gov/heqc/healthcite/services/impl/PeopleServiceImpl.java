@@ -9,6 +9,7 @@ import co.gov.heqc.healthcite.mappers.PeopleMapper;
 import co.gov.heqc.healthcite.repositories.PeopleRepository;
 import co.gov.heqc.healthcite.services.PeopleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,12 +22,14 @@ public class PeopleServiceImpl implements PeopleService {
 
     private final PeopleRepository peopleRepository;
     private final PeopleMapper peopleMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void createPerson(PersonRequestDto personRequest) {
         if (personRequest == null) {
             throw new NullPointerException();
         }
+        personRequest.setPassword( passwordEncoder.encode(personRequest.getPassword()) );
         peopleRepository.save(peopleMapper.toPeopleEntity(personRequest));
     }
 

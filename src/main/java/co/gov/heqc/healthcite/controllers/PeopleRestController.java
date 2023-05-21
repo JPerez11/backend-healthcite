@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,7 @@ public class PeopleRestController {
 
     private final PeopleService peopleService;
 
+    @Secured({"ADMIN", "DOCTOR"})
     @PostMapping("/")
     public ResponseEntity<Map<String, String>> createPerson(@Valid @RequestBody PersonRequestDto personRequest) {
         peopleService.createPerson(personRequest);
@@ -37,11 +39,13 @@ public class PeopleRestController {
                         PeopleConstants.PERSON_CREATED_MESSAGE));
     }
 
+    @Secured({"ADMIN", "DOCTOR"})
     @GetMapping("/{id}")
     public ResponseEntity<PersonResponseDto> getPersonById(@PathVariable Long id) {
         return ResponseEntity.ok(peopleService.getPersonById(id));
     }
 
+    @Secured({"ADMIN", "DOCTOR"})
     @GetMapping("/")
     public ResponseEntity<List<PersonResponseDto>> getAllPeople() {
         return ResponseEntity.ok(peopleService.getAllPeople());
