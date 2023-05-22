@@ -10,5 +10,7 @@ public class GlobalConstants {
     public static final String RESPONSE_DATA_MESSAGE_KEY = "data";
     public static final String RESPONSE_ERROR_MESSAGE_KEY = "error";
     public static final String WRONG_CREDENTIALS_MESSAGE = "Wrong credentials";
+    public static final String PATIENT_ROLE = "PATIENT";
+    public static final String DOCTOR_ROLE = "DOCTOR";
 
 }

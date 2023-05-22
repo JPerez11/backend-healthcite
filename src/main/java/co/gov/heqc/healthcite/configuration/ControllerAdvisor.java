@@ -1,9 +1,12 @@
 package co.gov.heqc.healthcite.configuration;
 
+import co.gov.heqc.healthcite.exceptions.AppointmentNoDataFoundException;
+import co.gov.heqc.healthcite.exceptions.AppointmentNotFoundException;
 import co.gov.heqc.healthcite.exceptions.MailAlreadyExistsException;
 import co.gov.heqc.healthcite.exceptions.PeopleNoDataFoundException;
 import co.gov.heqc.healthcite.exceptions.PersonAlreadyExistsException;
 import co.gov.heqc.healthcite.exceptions.PersonNotFoundException;
+import co.gov.heqc.healthcite.utils.constants.AppointmentConstants;
 import co.gov.heqc.healthcite.utils.constants.GlobalConstants;
 import co.gov.heqc.healthcite.utils.constants.PeopleConstants;
 import org.springframework.http.HttpStatus;
@@ -75,6 +78,23 @@ public class ControllerAdvisor {
                 .body(Collections.singletonMap(
                         GlobalConstants.RESPONSE_ERROR_MESSAGE_KEY,
                         PeopleConstants.MAIL_ALREADY_EXISTS_MESSAGE));
+    }
+    @ExceptionHandler(AppointmentNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleAppointmentNotFoundException(AppointmentNotFoundException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(Collections.singletonMap(
+                        GlobalConstants.RESPONSE_ERROR_MESSAGE_KEY,
+                        AppointmentConstants.APPOINTMENT_NOT_FOUND_MESSAGE));
+    }
+    @ExceptionHandler(AppointmentNoDataFoundException.class)
+    public ResponseEntity<Map<String, String>> handleAppointmentNoDataFoundException(
+            AppointmentNoDataFoundException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(Collections.singletonMap(
+                        GlobalConstants.RESPONSE_ERROR_MESSAGE_KEY,
+                        AppointmentConstants.APPOINTMENT_NO_DATA_FOUND_MESSAGE));
     }
 
 }

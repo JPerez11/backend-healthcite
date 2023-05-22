@@ -1,23 +1,25 @@
 insert into healthcite.roles (id, description, name)
 values (1, 'ROLE_ADMIN', 'ADMIN');
 insert into healthcite.roles (id, description, name)
-values (1, 'ROLE_DOCTOR', 'DOCTOR');
+values (2, 'ROLE_DOCTOR', 'DOCTOR');
 insert into healthcite.roles (id, description, name)
-values (1, 'ROLE_PATIENT', 'PATIENT');
+values (3, 'ROLE_PATIENT', 'PATIENT');
 
 insert into healthcite.people
     (id, address, birthdate, document, email, first_name, gender, last_name,
      password, phone, username, id_role)
 values
     (1,
-     'test street',
+     'admin street',
      '2000-01-01',
      '1234567890',
-     'test@example.com',
-     'testName',
-     'binary',
-     'testSurname',
-     '$2a$10$q.XGDLzKn8Oos3y5zGweIuAyN/.QVkiiFBk.MHI99lgPVzErUudJe',
+     'admin@example.com',
+     'adminName',
+     'male',
+     'adminSurname',
+     '$2a$10$8U2js1MRFl/o7vMn2/j/z.ctfTK1SBRIjsJ3o7UZgY7IZaQIbYYLG',
      '+1234567890',
-     'testUsername',
+     'adminUsername',
      1);
+
+-- password = admin123 --

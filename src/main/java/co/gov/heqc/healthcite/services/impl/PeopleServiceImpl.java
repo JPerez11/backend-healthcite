@@ -31,10 +31,10 @@ public class PeopleServiceImpl implements PeopleService {
         if (personRequest == null) {
             throw new NullPointerException();
         }
-        if (peopleRepository.findPeopleEntityByDocument(personRequest.getDocument())) {
+        if (peopleRepository.existsByDocument(personRequest.getDocument())) {
             throw new PersonAlreadyExistsException();
         }
-        if (peopleRepository.findPeopleEntityByEmail(personRequest.getEmail())) {
+        if (peopleRepository.existsByEmail(personRequest.getEmail())) {
             throw new MailAlreadyExistsException();
         }
         personRequest.setPassword( passwordEncoder.encode(personRequest.getPassword()) );
