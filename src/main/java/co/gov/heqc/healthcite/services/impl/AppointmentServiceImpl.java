@@ -41,7 +41,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 GlobalConstants.PATIENT_ROLE).orElseThrow(PersonNotFoundException::new);
         PeopleEntity doctor = peopleRepository.findByDocumentAndRoleName(appointmentRequest.getDoctorDocument(),
                 GlobalConstants.DOCTOR_ROLE).orElseThrow(PersonNotFoundException::new);
-        EpsEntity eps = epsRepository.findByName(appointmentRequest.getEpsName())
+        EpsEntity eps = epsRepository.findByNameIgnoreCase(appointmentRequest.getEpsName())
                 .orElseThrow(EpsNotFoundException::new);
 
         AppointmentEntity appointment = appointmentMapper.toAppointmentEntity(appointmentRequest);

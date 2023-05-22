@@ -2,11 +2,16 @@ package co.gov.heqc.healthcite.configuration;
 
 import co.gov.heqc.healthcite.exceptions.AppointmentNoDataFoundException;
 import co.gov.heqc.healthcite.exceptions.AppointmentNotFoundException;
+import co.gov.heqc.healthcite.exceptions.EpsAlreadyExistsException;
+import co.gov.heqc.healthcite.exceptions.EpsNoDataFoundException;
+import co.gov.heqc.healthcite.exceptions.EpsNotFoundByNitException;
+import co.gov.heqc.healthcite.exceptions.EpsNotFoundException;
 import co.gov.heqc.healthcite.exceptions.MailAlreadyExistsException;
 import co.gov.heqc.healthcite.exceptions.PeopleNoDataFoundException;
 import co.gov.heqc.healthcite.exceptions.PersonAlreadyExistsException;
 import co.gov.heqc.healthcite.exceptions.PersonNotFoundException;
 import co.gov.heqc.healthcite.utils.constants.AppointmentConstants;
+import co.gov.heqc.healthcite.utils.constants.EpsConstants;
 import co.gov.heqc.healthcite.utils.constants.GlobalConstants;
 import co.gov.heqc.healthcite.utils.constants.PeopleConstants;
 import org.springframework.http.HttpStatus;
@@ -95,6 +100,39 @@ public class ControllerAdvisor {
                 .body(Collections.singletonMap(
                         GlobalConstants.RESPONSE_ERROR_MESSAGE_KEY,
                         AppointmentConstants.APPOINTMENT_NO_DATA_FOUND_MESSAGE));
+    }
+    @ExceptionHandler(EpsAlreadyExistsException.class)
+    public ResponseEntity<Map<String, String>> handleEpsAlreadyExistsException(
+            EpsAlreadyExistsException epsAlreadyExistsException) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(Collections.singletonMap(
+                        GlobalConstants.RESPONSE_ERROR_MESSAGE_KEY,
+                        EpsConstants.EPS_ALREADY_EXISTS_MESSAGE));
+    }
+    @ExceptionHandler(EpsNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleEpsNotFoundException(EpsNotFoundException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(Collections.singletonMap(
+                        GlobalConstants.RESPONSE_ERROR_MESSAGE_KEY,
+                        EpsConstants.EPS_NOT_FOUND_MESSAGE));
+    }
+    @ExceptionHandler(EpsNotFoundByNitException.class)
+    public ResponseEntity<Map<String, String>> handleEpsNotFoundByNitException(EpsNotFoundByNitException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(Collections.singletonMap(
+                        GlobalConstants.RESPONSE_ERROR_MESSAGE_KEY,
+                        EpsConstants.EPS_NOT_FOUND_BY_NIT_MESSAGE));
+    }
+    @ExceptionHandler(EpsNoDataFoundException.class)
+    public ResponseEntity<Map<String, String>> handleEpsNoDataFoundException(EpsNoDataFoundException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(Collections.singletonMap(
+                        GlobalConstants.RESPONSE_ERROR_MESSAGE_KEY,
+                        EpsConstants.EPS_NO_DATA_FOUND_MESSAGE));
     }
 
 }

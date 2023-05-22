@@ -29,6 +29,6 @@ public class EpsEntity {
     @Column(name = "foundation_date")
     private LocalDate foundationDate;
     private String address;
-
+    private String phone;
 
 }

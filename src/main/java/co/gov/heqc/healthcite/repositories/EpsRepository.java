@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface EpsRepository extends JpaRepository<EpsEntity, Long> {
 
-    Optional<EpsEntity> findByName(String name);
+    Optional<EpsEntity> findByNameIgnoreCase(String name);
+    boolean existsByNit(String nit);
+    Optional<EpsEntity> findByNit(String nit);
 
 }
