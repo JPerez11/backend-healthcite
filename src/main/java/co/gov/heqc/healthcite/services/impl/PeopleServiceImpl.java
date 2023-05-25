@@ -57,4 +57,14 @@ public class PeopleServiceImpl implements PeopleService {
 
         return peopleMapper.toResponseList(peopleEntityList);
     }
+
+    @Override
+    public List<PersonResponseDto> getAllPeopleByRole(String role) {
+        List<PeopleEntity> peopleEntityList = peopleRepository.findAllByRoleName(role);
+        if (peopleEntityList.isEmpty()) {
+            throw new PeopleNoDataFoundException();
+        }
+
+        return peopleMapper.toResponseList(peopleEntityList);
+    }
 }

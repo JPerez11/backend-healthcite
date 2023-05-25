@@ -10,6 +10,6 @@ public interface PeopleService {
     void createPerson(PersonRequestDto personRequest);
     PersonResponseDto getPersonById(Long id);
     List<PersonResponseDto> getAllPeople();
-
+    List<PersonResponseDto> getAllPeopleByRole(String role);
 
 }

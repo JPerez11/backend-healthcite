@@ -52,5 +52,10 @@ public class PeopleRestController {
     public ResponseEntity<List<PersonResponseDto>> getAllPeople() {
         return ResponseEntity.ok(peopleService.getAllPeople());
     }
+    @Secured({"DOCTOR"})
+    @GetMapping("/doctor/{role}")
+    public ResponseEntity<List<PersonResponseDto>> getAllPeopleByRole(@PathVariable String role) {
+        return ResponseEntity.ok(peopleService.getAllPeopleByRole(role));
+    }
 
 }

@@ -1,6 +1,7 @@
 package co.gov.heqc.healthcite.configuration.security.jwt;
 
 import co.gov.heqc.healthcite.dto.response.JwtResponseDto;
+import co.gov.heqc.healthcite.services.impl.UserDetailsImpl;
 import com.nimbusds.jwt.JWT;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.JWTParser;
@@ -31,7 +32,7 @@ import java.util.List;
 public class JwtToken {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtToken.class);
     private static final String ROLE = "role";
-
+    private static final String ID = "id";
     private static final String ACCESS_TOKEN_SECRET = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXvCJ9";
     private static final Long ACCESS_TOKEN_VALIDITY_SECONDS = 3600L;
 
@@ -42,6 +43,8 @@ public class JwtToken {
         long expirationTime = ACCESS_TOKEN_VALIDITY_SECONDS * 1_000L;
         //Token expiration date
         Date expirationDate = new Date(System.currentTimeMillis() + expirationTime);
+        //User id
+        Long id = ((UserDetailsImpl) userDetails).getId();
         //User email
         String email = userDetails.getUsername();
         //User role
@@ -56,6 +59,7 @@ public class JwtToken {
         Claims claims = Jwts.claims().setSubject(email);
         //Set the role in JWT
         claims.put(ROLE, role);
+        claims.put(ID, id);
 
         //Token generation and return
         return Jwts.builder()
