@@ -31,7 +31,6 @@ public class PeopleMapperImpl implements PeopleMapper {
         peopleEntity.setBirthdate( personRequest.getBirthdate() );
         peopleEntity.setGender( personRequest.getGender() );
         peopleEntity.setEmail( personRequest.getEmail() );
-        peopleEntity.setUsername( personRequest.getUsername() );
         peopleEntity.setPassword( personRequest.getPassword() );
         peopleEntity.setRole( personRequestDtoToRoleEntity(personRequest) );
 
@@ -56,7 +55,6 @@ public class PeopleMapperImpl implements PeopleMapper {
         personResponse.setBirthdate( peopleEntity.getBirthdate() );
         personResponse.setGender( peopleEntity.getGender() );
         personResponse.setEmail( peopleEntity.getEmail() );
-        personResponse.setUsername( peopleEntity.getUsername() );
         personResponse.setRoleName( peopleEntityToRoleName(peopleEntity) );
 
         return personResponse;

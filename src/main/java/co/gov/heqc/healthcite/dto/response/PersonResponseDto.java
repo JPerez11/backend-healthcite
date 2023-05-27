@@ -21,7 +21,6 @@ public class PersonResponseDto {
     private LocalDate birthdate;
     private String gender;
     private String email;
-    private String username;
     private String roleName;
 
 }

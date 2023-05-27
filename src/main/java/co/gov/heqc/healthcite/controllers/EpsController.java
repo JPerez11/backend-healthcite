@@ -56,7 +56,7 @@ public class EpsController {
         return ResponseEntity.ok(epsService.getEpsByNit(nit));
     }
 
-    @Secured({"ADMIN"})
+    @Secured({"ADMIN", "DOCTOR"})
     @GetMapping("/")
     public ResponseEntity<List<EpsResponseDto>> getAllEps() {
         return ResponseEntity.ok(epsService.getAllEps());

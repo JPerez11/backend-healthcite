@@ -48,6 +48,8 @@ public class AppointmentMapperImpl implements AppointmentMapper {
         response.setSymptoms(appointmentEntity.getSymptoms() );
         response.setEps( appointmentEntity.getEps().getName() );
         response.setPatientName( appointmentEntity.getPatient().getFirstName() );
+        response.setPatientDocument( appointmentEntity.getPatient().getDocument() );
+        response.setPatientPhone( appointmentEntity.getPatient().getPhone() );
 
         return response;
     }

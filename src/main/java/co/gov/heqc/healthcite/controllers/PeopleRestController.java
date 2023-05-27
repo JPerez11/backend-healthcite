@@ -41,7 +41,7 @@ public class PeopleRestController {
                         PeopleConstants.PERSON_CREATED_MESSAGE));
     }
 
-    @Secured({"ADMIN", "DOCTOR"})
+    @Secured({"ADMIN", "DOCTOR", "PATIENT"})
     @GetMapping("/{id}")
     public ResponseEntity<PersonResponseDto> getPersonById(@PathVariable Long id) {
         return ResponseEntity.ok(peopleService.getPersonById(id));

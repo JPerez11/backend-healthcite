@@ -21,5 +21,7 @@ public class AppointmentResponseDto {
     private String symptoms;
     private String eps;
     private String patientName;
+    private String patientDocument;
+    private String patientPhone;
 
 }

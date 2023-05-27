@@ -39,8 +39,6 @@ public class PersonRequestDto {
     @Email(message = "Mail must be in a valid format")
     @NotBlank(message = "The email field cannot be empty")
     private String email;
-    @NotBlank(message = "The username cannot be empty")
-    private String username;
     @NotBlank(message = "The password field cannot be empty")
     private String password;
     @NotNull(message = "The role id cannot be empty")

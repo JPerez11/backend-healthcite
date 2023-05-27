@@ -7,7 +7,7 @@ values (3, 'ROLE_PATIENT', 'PATIENT');
 
 insert into healthcite.people
     (id, address, birthdate, document, email, first_name, gender, last_name,
-     password, phone, username, id_role)
+     password, phone, id_role)
 values
     (1,
      'admin street',
@@ -19,7 +19,6 @@ values
      'adminSurname',
      '$2a$10$8U2js1MRFl/o7vMn2/j/z.ctfTK1SBRIjsJ3o7UZgY7IZaQIbYYLG',
      '+1234567890',
-     'adminUsername',
      1);
 
 -- password = admin123 --
