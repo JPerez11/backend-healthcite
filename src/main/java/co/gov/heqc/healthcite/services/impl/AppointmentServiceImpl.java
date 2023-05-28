@@ -2,6 +2,7 @@ package co.gov.heqc.healthcite.services.impl;
 
 import co.gov.heqc.healthcite.dto.request.AppointmentRequestDto;
 import co.gov.heqc.healthcite.dto.request.AppointmentStatusDto;
+import co.gov.heqc.healthcite.dto.response.AppointPatientResponseDto;
 import co.gov.heqc.healthcite.dto.response.AppointmentResponseDto;
 import co.gov.heqc.healthcite.entities.AppointmentEntity;
 import co.gov.heqc.healthcite.entities.EpsEntity;
@@ -72,12 +73,12 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<AppointmentResponseDto> getAllAppointmentsByPatient(Long idPatient) {
+    public List<AppointPatientResponseDto> getAllAppointmentsByPatient(Long idPatient) {
 
         if (idPatient == null) {
             throw new NullPointerException();
         }
-        List<AppointmentResponseDto> responseList = appointmentMapper.toResponseList(appointmentRepository
+        List<AppointPatientResponseDto> responseList = appointmentMapper.toPatientResponseList(appointmentRepository
                 .findAppointmentEntitiesByPatientId(idPatient));
 
         if (responseList.isEmpty()) {

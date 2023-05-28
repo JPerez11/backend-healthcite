@@ -24,7 +24,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/people")
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class PeopleRestController {
 
@@ -52,8 +52,8 @@ public class PeopleRestController {
     public ResponseEntity<List<PersonResponseDto>> getAllPeople() {
         return ResponseEntity.ok(peopleService.getAllPeople());
     }
-    @Secured({"ADMIN", "DOCTOR"})
-    @GetMapping("/doctor/{role}")
+    @Secured({"ADMIN", "DOCTOR", "PATIENT"})
+    @GetMapping("/type/{role}")
     public ResponseEntity<List<PersonResponseDto>> getAllPeopleByRole(@PathVariable String role) {
         return ResponseEntity.ok(peopleService.getAllPeopleByRole(role));
     }

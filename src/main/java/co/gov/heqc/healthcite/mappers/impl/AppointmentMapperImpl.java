@@ -1,6 +1,7 @@
 package co.gov.heqc.healthcite.mappers.impl;
 
 import co.gov.heqc.healthcite.dto.request.AppointmentRequestDto;
+import co.gov.heqc.healthcite.dto.response.AppointPatientResponseDto;
 import co.gov.heqc.healthcite.dto.response.AppointmentResponseDto;
 import co.gov.heqc.healthcite.entities.AppointmentEntity;
 import co.gov.heqc.healthcite.mappers.AppointmentMapper;
@@ -67,6 +68,43 @@ public class AppointmentMapperImpl implements AppointmentMapper {
         for (AppointmentEntity apointment :
                 appointmentEntityList) {
             list.add(toAppointmentResponse(apointment) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public AppointPatientResponseDto toPatientResponse(AppointmentEntity appointmentEntity) {
+
+        if (appointmentEntity == null) {
+            return null;
+        }
+
+        AppointPatientResponseDto response = new AppointPatientResponseDto();
+
+        response.setId( appointmentEntity.getId() );
+        response.setDescription( appointmentEntity.getDescription() );
+        response.setCitationDate( appointmentEntity.getCitationDate() );
+        response.setStatus( appointmentEntity.getStatus() );
+        response.setEps( appointmentEntity.getEps().getName() );
+        response.setDoctorName( appointmentEntity.getDoctor().getFirstName() );
+        response.setDoctorDocument( appointmentEntity.getDoctor().getDocument() );
+        response.setDoctorPhone( appointmentEntity.getDoctor().getPhone() );
+
+        return response;
+    }
+
+    @Override
+    public List<AppointPatientResponseDto> toPatientResponseList(List<AppointmentEntity> appointmentEntityList) {
+        if (appointmentEntityList == null || appointmentEntityList.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        List<AppointPatientResponseDto> list = new ArrayList<>(appointmentEntityList.size());
+
+        for (AppointmentEntity apointment :
+                appointmentEntityList) {
+            list.add(toPatientResponse(apointment) );
         }
 
         return list;

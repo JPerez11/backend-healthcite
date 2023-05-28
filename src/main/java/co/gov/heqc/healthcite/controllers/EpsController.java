@@ -25,7 +25,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/eps")
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class EpsController {
 
@@ -56,7 +56,7 @@ public class EpsController {
         return ResponseEntity.ok(epsService.getEpsByNit(nit));
     }
 
-    @Secured({"ADMIN", "DOCTOR"})
+    @Secured({"ADMIN", "DOCTOR", "PATIENT"})
     @GetMapping("/")
     public ResponseEntity<List<EpsResponseDto>> getAllEps() {
         return ResponseEntity.ok(epsService.getAllEps());

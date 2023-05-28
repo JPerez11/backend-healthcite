@@ -2,6 +2,7 @@ package co.gov.heqc.healthcite.controllers;
 
 import co.gov.heqc.healthcite.dto.request.AppointmentRequestDto;
 import co.gov.heqc.healthcite.dto.request.AppointmentStatusDto;
+import co.gov.heqc.healthcite.dto.response.AppointPatientResponseDto;
 import co.gov.heqc.healthcite.dto.response.AppointmentResponseDto;
 import co.gov.heqc.healthcite.services.AppointmentService;
 import co.gov.heqc.healthcite.utils.constants.AppointmentConstants;
@@ -26,7 +27,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/appointment")
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class AppointmentController {
 
@@ -53,7 +54,7 @@ public class AppointmentController {
 
     @Secured({"PATIENT"})
     @GetMapping("/patient/{id}")
-    public ResponseEntity<List<AppointmentResponseDto>> getAllAppointmentsByPatientId(@PathVariable Long id) {
+    public ResponseEntity<List<AppointPatientResponseDto>> getAllAppointmentsByPatientId(@PathVariable Long id) {
         return ResponseEntity.ok(appointmentService.getAllAppointmentsByPatient(id));
     }
 
