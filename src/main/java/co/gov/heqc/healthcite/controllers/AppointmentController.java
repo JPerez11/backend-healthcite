@@ -1,6 +1,7 @@
 package co.gov.heqc.healthcite.controllers;
 
 import co.gov.heqc.healthcite.dto.request.AppointmentRequestDto;
+import co.gov.heqc.healthcite.dto.request.AppointmentStatusDto;
 import co.gov.heqc.healthcite.dto.response.AppointmentResponseDto;
 import co.gov.heqc.healthcite.services.AppointmentService;
 import co.gov.heqc.healthcite.utils.constants.AppointmentConstants;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,7 +51,7 @@ public class AppointmentController {
         return ResponseEntity.ok(appointmentService.getAppointmentById(id));
     }
 
-    @Secured({"DOCTOR"})
+    @Secured({"PATIENT"})
     @GetMapping("/patient/{id}")
     public ResponseEntity<List<AppointmentResponseDto>> getAllAppointmentsByPatientId(@PathVariable Long id) {
         return ResponseEntity.ok(appointmentService.getAllAppointmentsByPatient(id));
@@ -57,9 +59,30 @@ public class AppointmentController {
 
     @Secured({"DOCTOR"})
     @GetMapping("/doctor/{id}")
-    public ResponseEntity<List<AppointmentResponseDto>> getAllAppointmentByDoctorId(@PathVariable Long id) {
+    public ResponseEntity<List<AppointmentResponseDto>> getAllAppointmentsByDoctorId(@PathVariable Long id) {
         return ResponseEntity.ok(appointmentService.getAllAppointmentsByDoctor(id));
     }
 
+    @Secured({"DOCTOR"})
+    @GetMapping("/doctor/status/{id}")
+    public ResponseEntity<List<AppointmentResponseDto>> getAllAppointmentsByDoctorIdAndStatus(
+            @PathVariable Long id,
+            @RequestBody AppointmentStatusDto appointmentStatus) {
+        return ResponseEntity.ok(appointmentService.getAllAppointmentsByDoctorAndStatus(id, appointmentStatus));
+    }
+
+    @Secured({"DOCTOR"})
+    @PatchMapping("/update/status/{id}")
+    public ResponseEntity<Map<String, String>> updateAppointmentStatus(
+            @PathVariable Long id,
+            @RequestBody AppointmentStatusDto updateStatus) {
+        appointmentService.updateAppointmentStatus(id, updateStatus);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(Collections.singletonMap(
+                        GlobalConstants.RESPONSE_MESSAGE_KEY,
+                        AppointmentConstants.APPOINTMENT_UPDATED_MESSAGE
+                ));
+    }
 
 }

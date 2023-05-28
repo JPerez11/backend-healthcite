@@ -20,7 +20,7 @@ public class EpsRequestDto {
     @NotBlank(message = "The name field cannot be empty")
     private String name;
     @NotBlank(message = "The nit field cannot be empty")
-    @Pattern(regexp = "^\\d{0,14}$", message = "The document field must contain numbers and a maximum of 14 characters")
+    @Pattern(regexp = "^\\d{9}-\\d$", message = "The document field must contain numbers and a maximum of 14 characters")
     private String nit;
     @Past(message = "Must be a past date")
     @NotNull(message = "The foundation date field cannot be empty")

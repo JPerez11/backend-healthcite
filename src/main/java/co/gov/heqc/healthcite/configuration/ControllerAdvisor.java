@@ -2,6 +2,7 @@ package co.gov.heqc.healthcite.configuration;
 
 import co.gov.heqc.healthcite.exceptions.AppointmentNoDataFoundException;
 import co.gov.heqc.healthcite.exceptions.AppointmentNotFoundException;
+import co.gov.heqc.healthcite.exceptions.DoctorHasAppointmentPendingException;
 import co.gov.heqc.healthcite.exceptions.EpsAlreadyExistsException;
 import co.gov.heqc.healthcite.exceptions.EpsNoDataFoundException;
 import co.gov.heqc.healthcite.exceptions.EpsNotFoundByNitException;
@@ -100,6 +101,15 @@ public class ControllerAdvisor {
                 .body(Collections.singletonMap(
                         GlobalConstants.RESPONSE_ERROR_MESSAGE_KEY,
                         AppointmentConstants.APPOINTMENT_NO_DATA_FOUND_MESSAGE));
+    }
+    @ExceptionHandler(DoctorHasAppointmentPendingException.class)
+    public ResponseEntity<Map<String, String>> handleDoctorHasAppointmentPendingException(
+            DoctorHasAppointmentPendingException ex) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(Collections.singletonMap(
+                        GlobalConstants.RESPONSE_ERROR_MESSAGE_KEY,
+                        AppointmentConstants.APPOINTMENT_CREATE_CONFLICT_MESSAGE));
     }
     @ExceptionHandler(EpsAlreadyExistsException.class)
     public ResponseEntity<Map<String, String>> handleEpsAlreadyExistsException(

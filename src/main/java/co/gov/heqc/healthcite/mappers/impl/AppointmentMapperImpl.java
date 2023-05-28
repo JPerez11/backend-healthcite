@@ -24,7 +24,7 @@ public class AppointmentMapperImpl implements AppointmentMapper {
         entity.setDescription(appointmentRequest.getDescription() );
         entity.setAttentionDate( appointmentRequest.getAttentionDate() );
         entity.setCitationDate( appointmentRequest.getCitationDate() );
-        entity.setActive(appointmentRequest.getActive() );
+        entity.setStatus(appointmentRequest.getStatus() );
         entity.setReason(appointmentRequest.getReason() );
         entity.setSymptoms(appointmentRequest.getSymptoms() );
 
@@ -40,12 +40,13 @@ public class AppointmentMapperImpl implements AppointmentMapper {
 
         AppointmentResponseDto response = new AppointmentResponseDto();
 
-        response.setDescription(appointmentEntity.getDescription() );
+        response.setId( appointmentEntity.getId() );
+        response.setDescription( appointmentEntity.getDescription() );
         response.setAttentionDate( appointmentEntity.getAttentionDate() );
         response.setCitationDate( appointmentEntity.getCitationDate() );
-        response.setActive(appointmentEntity.getActive() );
-        response.setReason(appointmentEntity.getReason() );
-        response.setSymptoms(appointmentEntity.getSymptoms() );
+        response.setStatus( appointmentEntity.getStatus() );
+        response.setReason( appointmentEntity.getReason() );
+        response.setSymptoms( appointmentEntity.getSymptoms() );
         response.setEps( appointmentEntity.getEps().getName() );
         response.setPatientName( appointmentEntity.getPatient().getFirstName() );
         response.setPatientDocument( appointmentEntity.getPatient().getDocument() );

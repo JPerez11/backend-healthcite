@@ -27,21 +27,23 @@ public class AppointmentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
-    @Column(name = "attention_date")
+    @Column(name = "attention_date", nullable = false)
     private LocalDateTime attentionDate;
-    @Column(name = "citation_date")
+    @Column(name = "citation_date", nullable = false)
     private LocalDateTime citationDate;
-    private String active = "PENDING";
+    private String status;
+    @Column(nullable = false)
     private String reason;
+    @Column(nullable = false)
     private String symptoms;
     @ManyToOne
-    @JoinColumn(name = "id_eps")
+    @JoinColumn(name = "id_eps", nullable = false)
     private EpsEntity eps;
     @ManyToOne
-    @JoinColumn(name = "id_patient")
+    @JoinColumn(name = "id_patient", nullable = false)
     private PeopleEntity patient;
     @ManyToOne
-    @JoinColumn(name = "id_doctor")
+    @JoinColumn(name = "id_doctor", nullable = false)
     private PeopleEntity doctor;
 
 }

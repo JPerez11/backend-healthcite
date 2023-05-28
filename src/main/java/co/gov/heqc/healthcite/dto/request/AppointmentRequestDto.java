@@ -1,5 +1,6 @@
 package co.gov.heqc.healthcite.dto.request;
 
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -21,9 +22,10 @@ public class AppointmentRequestDto {
     @Past(message = "Must be a past date")
     @NotNull(message = "The attention date field cannot be empty")
     private LocalDateTime attentionDate;
+    @Future(message = "The citation date must be for the furute")
     @NotNull(message = "The citation date field cannot be empty")
     private LocalDateTime citationDate;
-    private String active = "PENDING";
+    private String status = "PENDING";
     @NotBlank(message = "The reason field cannot be empty")
     private String reason;
     @NotBlank(message = "The symptoms field cannot be empty")

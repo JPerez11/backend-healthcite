@@ -13,10 +13,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class AppointmentResponseDto {
 
+    private Long id;
     private String description;
     private LocalDateTime attentionDate;
     private LocalDateTime citationDate;
-    private String active;
+    private String status;
     private String reason;
     private String symptoms;
     private String eps;
